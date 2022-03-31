@@ -5,6 +5,7 @@ const { Cart } = require('../models/cart.model');
 const { ProductInCart } = require('../models/productInCart.model');
 const { Order } = require('../models/order.model');
 
+
 const initModels = () => {
   // 1 User <--> M Product
   User.hasMany(Product);
@@ -17,9 +18,6 @@ const initModels = () => {
   // 1 User <--> 1 Cart
   User.hasOne(Cart);
   Cart.belongsTo(User);
-
-  // Cart.hasMany(Product, { through: productId })
-  // Product.hasMany(Cart, { through: cartId })
 
   // M Cart <--> M Product
   Cart.belongsToMany(Product, { through: ProductInCart });

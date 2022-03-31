@@ -9,7 +9,7 @@ const morgan = require('morgan');
 // Routers
 const { userRouter } = require('./routes/users.routes');
 const { productsRouter } = require('./routes/products.routes');
-const { ordersRouter } = require('./routes/orders.routes');
+const { cartsRouter } = require('./routes/carts.routes');
 
 // Controllers
 const { globalErrorHandler } = require('./controllers/error.controller');
@@ -30,7 +30,7 @@ app.use(cookieParser());
 // Limit for petions
 app.use(rateLimit({
 	windowMs: 60 * 1000,
-	max: 5,
+	max: 50,
 	message: `You have made too much petions to our API`
 
 }));
@@ -43,7 +43,7 @@ app.use(morgan('dev'));
 // Endpoints
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/products', productsRouter);
-app.use('/api/v1/orders', ordersRouter);
+app.use('/api/v1/carts', cartsRouter);
 
 app.use('*', (req, res, next) => {
 	next(new AppError(`Can't find ${req.originalUrl} on this server`, 404));
@@ -53,4 +53,4 @@ app.use(globalErrorHandler);
 
 module.exports = { app };
 
-require('crypto').randomBytes(64).toString('hex');
+// require('crypto').randomBytes(64).toString('hex');

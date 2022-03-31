@@ -1,4 +1,5 @@
 const { Op } = require('sequelize');
+const { Cart } = require('../models/cart.model');
 
 // Models
 const { Product } = require('../models/product.model');
@@ -12,7 +13,8 @@ const { filterObj } = require('../utils/filterObj');
 exports.getAllProducts = catchAsync(async (req, res, next) => {
 	const products = await Product.findAll({
 		where: { status: 'active' },
-		include: [{ model: User, attributes: { exclude: ['password'] } }],
+		include: [{ model: User, attributes: { exclude: ['password'] } }], 
+		include: [{ model: Cart}]
 	});
 
 	res.status(200).json({

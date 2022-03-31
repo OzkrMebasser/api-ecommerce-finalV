@@ -28,9 +28,9 @@ exports.getUserCart = catchAsync(async (req, res, next) => {
 exports.addProductToCart = catchAsync(async (req, res, next) => {
 	const { product } = req.body;
 	const { currentUser } = req;
-	console.log(product)
+	console.table(product)
 
-	const filteredObj = filterObj(product, 'id', 'quantity', 'price');
+	const filteredObj = filterObj(product, 'id', 'productId', 'quantity');
 
 	// Validate if quantity is less or equal to existing quantity
 	const productExists = await Product.findOne({
@@ -169,3 +169,8 @@ exports.updateProductCart = catchAsync(async (req, res, next) => {
 
 	res.status(204).json({ status: 'success' });
 });
+
+
+exports.purchaseCart = catchAsync(async (req, res, next) => {});
+
+exports.removeProductFromCart = catchAsync(async (req, res, next) => {});

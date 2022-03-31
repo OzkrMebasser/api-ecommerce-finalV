@@ -4,7 +4,10 @@ const dotenv = require('dotenv');
 
 // Models
 const { User } = require('../models/user.model');
-const { Order } =require('../models/order.model');
+const { Cart } =require('../models/cart.model');
+const { Product } =require('../models/product.model');
+const { productInCart } =require('../models/productInCart.model');
+
 
 // Utils
 const { AppError } = require('../utils/appError');
@@ -19,18 +22,12 @@ exports.getAllUsers = catchAsync(async (req, res, next) => {
 	  where: { status: 'active'  },
 	
 	  attributes: { exclude: ['password'] },
-	//   include: [
-	// 	{
-	// 	  model: Movie,
-	// 	  include: [
-	// 		{
-	// 		  model: User,
-	// 		  attributes: { exclude: ['password', 'role'] },
-	// 		  include: [{ model: Review }]
-	// 		}
-	// 	  ]
-	// 	}
-	//   ]
+	  include: [
+		{
+		  model: Product,
+		
+		}
+	  ]
 	});
   
 	res.status(200).json({
@@ -39,9 +36,9 @@ exports.getAllUsers = catchAsync(async (req, res, next) => {
 	});
   });
 
-exports.getUserOrders = catchAsync( async (req, res, next ) => {
+// exports.getUserOrders = catchAsync( async (req, res, next ) => {
 
-});
+// });
 
 exports.loginUser = catchAsync(async (req, res, next) => {
 	const { email, password } = req.body;
@@ -82,6 +79,11 @@ exports.getUserById = catchAsync(async (req, res, next) => {
 	const user = await User.findOne({
 		attributes: { exclude: ['password'] },
 		where: { id },
+	
+		attributes: { exclude: ['password'] },
+		
+		
+		include: [{model: Product, include: [{model: Cart}],}],
 	});
 
 	if (!user) {
