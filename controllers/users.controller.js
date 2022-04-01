@@ -6,7 +6,7 @@ const dotenv = require('dotenv');
 const { User } = require('../models/user.model');
 const { Cart } =require('../models/cart.model');
 const { Product } =require('../models/product.model');
-const { productInCart } =require('../models/productInCart.model');
+
 
 
 // Utils
@@ -36,9 +36,6 @@ exports.getAllUsers = catchAsync(async (req, res, next) => {
 	});
   });
 
-// exports.getUserOrders = catchAsync( async (req, res, next ) => {
-
-// });
 
 exports.loginUser = catchAsync(async (req, res, next) => {
 	const { email, password } = req.body;
@@ -52,7 +49,7 @@ exports.loginUser = catchAsync(async (req, res, next) => {
 
 	// Generate JWT
 	const token = await jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
-		expiresIn: process.env.JWT_EXPIRES_IN,
+		expiresIn: process.env.JWT_EXPIRES_IN
 	});
 
 	const cookieOptions = {

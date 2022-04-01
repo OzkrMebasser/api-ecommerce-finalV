@@ -43,7 +43,7 @@ app.use(morgan('dev'));
 // Endpoints
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/products', productsRouter);
-app.use('/api/v1/carts', cartsRouter);
+app.use('/api/v1/cart', cartsRouter);
 
 app.use('*', (req, res, next) => {
 	next(new AppError(`Can't find ${req.originalUrl} on this server`, 404));

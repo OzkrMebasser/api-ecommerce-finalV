@@ -5,6 +5,8 @@ const {
 	addProductToCart,
 	getUserCart,
 	updateProductCart,
+	purchaseCart,
+	removeProductFromCart
 } = require('../controllers/carts.controller');
 
 // Middlewares
@@ -16,10 +18,11 @@ const { protectSession } = require('../middlewares/auth.middleware');
 
 const router = express.Router();
 
+
 router.use(protectSession);
 
 // Get user's cart
-router.get('/get-cart', getUserCart);
+router.get('/my-cart', getUserCart);
 
 // Add product to cart
 router.post('/add-product', addProductToCart);
@@ -27,15 +30,15 @@ router.post('/add-product', addProductToCart);
 // Update cart product quantity
 router.patch(
 	'/update-cart-product',
-	updateProductCartValidations,
-	validateResult,
+	
 	updateProductCart
 );
 
+
+router.post('/purchase', purchaseCart);
+
 // Remove product from cart
+router.delete('/:productId', removeProductFromCart);
 
-// Create order
-
-// Get user's orders
 
 module.exports = { cartsRouter: router };
