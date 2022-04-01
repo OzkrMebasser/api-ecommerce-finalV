@@ -11,12 +11,17 @@ const db = new Sequelize({
 	database: process.env.DB,
 	port: process.env.DB_PORT,
 	logging: false,
-	dialectOptions: {
+	dialectOptions: 
+		//If we are in producction set this
+		process.env.NODE_ENV === 'production' ?
+		{
 		ssl: {
 			require: true,
 			rejectUnauthorized: false
 		}
 	}
+	// else 'development'
+	: {}
 });
 
 module.exports = { db };
