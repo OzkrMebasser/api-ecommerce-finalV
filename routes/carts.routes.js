@@ -28,14 +28,10 @@ router.get('/my-cart', getUserCart);
 router.post('/add-product', addProductToCart);
 
 // Update cart product quantity
-router.patch(
-	'/update-cart-product',
-	
-	updateProductCart
-);
+router.patch('/update-cart-product',updateProductCart);
 
 
-router.post('/purchase', purchaseCart);
+router.post('/purchase',purchaseCart);
 
 // Remove product from cart
 router.delete('/:productId', removeProductFromCart);

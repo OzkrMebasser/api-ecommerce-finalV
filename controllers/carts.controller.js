@@ -195,7 +195,7 @@ exports.removeProductFromCart = catchAsync(async (req, res, next) => {
 	});
   
 	if (!cart) {
-	  return next(new AppError(404, 'This user does not have a cart yet'));
+	  return next(new AppError('This user does not have a cart yet', 404));
 	}
   
 	let totalPrice = 0;
