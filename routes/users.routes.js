@@ -34,6 +34,8 @@ router
 
 
 // Post - Login user
+// router.post('/login', loginUserValidations);
 router.post('/login', loginUserValidations, validateResult, loginUser);
+
 
 module.exports = { userRouter: router };

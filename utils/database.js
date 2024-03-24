@@ -10,7 +10,13 @@ const db = new Sequelize({
 	password: process.env.DB_PASSWORD,
 	database: process.env.DB,
 	port: process.env.DB_PORT,
+	// host: "localhost",
+	// username: "postgres",
+	// password: "ozkrPostgreSQL2430",
+	// database: "postgres",
+	// port: 5432,
 	logging: false,
+
 	dialectOptions: 
 		//If we are in producction set this
 		process.env.NODE_ENV === 'production' ?
